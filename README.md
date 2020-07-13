@@ -35,6 +35,18 @@ This project uses the following software and Python libraries:
 **Data points with Education Level 'Bachelors', 'Masters', or 'Doctorate' highlighted in scatter plot**
 ![scatter](screen_shots/scatter_with_higher_education.png)
 
+**Performance when using categorical embeddings**
+
+- Accuracy: 0.8600
+- F-score: 0.7281
+- Time taken: 5.4644 s
+
+**Performance when using one-hot encoding**
+
+- Accuracy: 0.8608
+- F-score: 0.7337
+- Time taken: 3.9130 s
+
 ## Acknowledgements
 
 - [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Census+Income)

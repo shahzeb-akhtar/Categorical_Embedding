@@ -24,28 +24,28 @@ This project uses the following software and Python libraries:
 ## Results
 
 **Scatter plot with tooltip shown on hover over a data point**
-![scatter](screen_shots/scatter_with_hover.png)
+![scatter](screen_shots/only_scatter.png)
 
 **Data points with Gender 'Female' highlighted in scatter plot**
 ![scatter](screen_shots/scatter_with_female.png)
 
 **Data points with Marital status 'Married-civ-spouse' highlighted in scatter plot**
-![scatter](screen_shots/scatter_married_with_spouse.png)
+![scatter](screen_shots/scatter_with_married.png)
 
 **Data points with Education Level 'Bachelors', 'Masters', or 'Doctorate' highlighted in scatter plot**
 ![scatter](screen_shots/scatter_with_higher_education.png)
 
 **Performance when using categorical embeddings**
 
-- Accuracy: 0.8600
-- F-score: 0.7281
-- Time taken: 5.4644 s
+- Accuracy: 0.8605
+- F-score: 0.7290
+- Time taken: 5.1834 s
 
 **Performance when using one-hot encoding**
 
 - Accuracy: 0.8608
 - F-score: 0.7337
-- Time taken: 3.9130 s
+- Time taken: 3.9037 s
 
 ## Acknowledgements
 

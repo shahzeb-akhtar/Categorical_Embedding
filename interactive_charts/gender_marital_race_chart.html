@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .error {
+        color: red;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.8.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"orient": "bottom"}}, "hconcat": [{"mark": "circle", "encoding": {"color": {"condition": {"type": "nominal", "field": "income", "selection": {"or": [{"or": ["sex", "marital"]}, "race"]}}, "value": "lightgray"}, "tooltip": [{"type": "quantitative", "field": "age"}, {"type": "nominal", "field": "workclass"}, {"type": "nominal", "field": "education_level"}, {"type": "quantitative", "field": "education-num"}, {"type": "nominal", "field": "marital-status"}, {"type": "nominal", "field": "occupation"}, {"type": "nominal", "field": "relationship"}, {"type": "nominal", "field": "race"}, {"type": "nominal", "field": "sex"}, {"type": "quantitative", "field": "capital-gain"}, {"type": "quantitative", "field": "capital-loss"}, {"type": "quantitative", "field": "hours-per-week"}, {"type": "nominal", "field": "native-country"}], "x": {"type": "quantitative", "field": "x"}, "y": {"type": "quantitative", "field": "y"}}, "height": 500, "selection": {"selector002": {"type": "single"}}, "width": 500}, {"vconcat": [{"mark": "bar", "encoding": {"color": {"condition": {"type": "nominal", "field": "income", "selection": "sex"}, "value": "lightgray"}, "x": {"type": "quantitative", "aggregate": "count", "axis": {"title": ""}}, "y": {"type": "nominal", "axis": {"labelFontSize": 12, "ticks": false, "title": ""}, "field": "sex", "sort": "-x"}}, "height": 60, "selection": {"sex": {"type": "multi", "fields": ["sex"]}}, "title": "Sex", "width": 200}, {"mark": "bar", "encoding": {"color": {"condition": {"type": "nominal", "field": "income", "selection": "marital"}, "value": "lightgray"}, "x": {"type": "quantitative", "aggregate": "count", "axis": {"title": ""}}, "y": {"type": "nominal", "axis": {"labelFontSize": 12, "ticks": false, "title": ""}, "field": "marital-status", "sort": "-x"}}, "height": 225, "selection": {"marital": {"type": "multi", "fields": ["marital-status"]}}, "title": "Marital Status", "width": 200}, {"mark": "bar", "encoding": {"color": {"condition": {"type": "nominal", "field": "income", "selection": "race"}, "value": "lightgray"}, "x": {"type": "quantitative", "aggregate": "count", "axis": {"title": ""}}, "y": {"type": "nominal", "axis": {"labelFontSize": 12, "ticks": false, "title": ""}, "field": "race", "sort": "-x"}}, "height": 125, "selection": {"race": {"type": "multi", "fields": ["race"]}}, "title": "Race", "width": 200}]}], "data": {"url": "altair-data-739a50f573f34415ad91d4751dc6a6b4.json", "format": {"type": "json"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json"};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div class="error" style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

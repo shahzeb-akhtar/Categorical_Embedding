@@ -6,15 +6,114 @@
         color: red;
     }
   </style>
+  <script type="text/javascript" src="https://d3js.org/d3-selection.v1.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.8.1"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
 </head>
 <body>
+  <h3 id="vis_ttl" style="font-family: Helvetica;">Scatter Plot</h3>
   <div id="vis"></div>
   <script>
-    (function(vegaEmbed) {
-      var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "altair-data-739a50f573f34415ad91d4751dc6a6b4.json", "format": {"type": "json"}}, "mark": "circle", "encoding": {"color": {"type": "nominal", "field": "income"}, "tooltip": [{"type": "quantitative", "field": "age"}, {"type": "nominal", "field": "workclass"}, {"type": "nominal", "field": "education_level"}, {"type": "quantitative", "field": "education-num"}, {"type": "nominal", "field": "marital-status"}, {"type": "nominal", "field": "occupation"}, {"type": "nominal", "field": "relationship"}, {"type": "nominal", "field": "race"}, {"type": "nominal", "field": "sex"}, {"type": "quantitative", "field": "capital-gain"}, {"type": "quantitative", "field": "capital-loss"}, {"type": "quantitative", "field": "hours-per-week"}, {"type": "nominal", "field": "native-country"}], "x": {"type": "quantitative", "field": "x"}, "y": {"type": "quantitative", "field": "y"}}, "height": 600, "selection": {"selector001": {"type": "interval", "bind": "scales", "encodings": ["x", "y"]}}, "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json"};
+    var divElement = d3.select('#vis');
+    var titleElement = d3.select('#vis_ttl');
+    var visualize = function(vegaEmbed, width, height, el) {
+      var spec = {
+        "config": {
+          "view": {
+            "continuousWidth": 400,
+            "continuousHeight": 300
+          }
+        },
+        "data": {
+          "url": "altair-data-ad5eabdff90a827509b12a9aaa59bbfe.json",
+          "format": {
+            "type": "json"
+          }
+        },
+        "mark": "circle",
+        "encoding": {
+          "color": {
+            "type": "nominal",
+            "field": "income"
+          },
+          "tooltip": [
+            {
+              "type": "quantitative",
+              "field": "age"
+            },
+            {
+              "type": "nominal",
+              "field": "workclass"
+            },
+            {
+              "type": "nominal",
+              "field": "education_level"
+            },
+            {
+              "type": "quantitative",
+              "field": "education-num"
+            },
+            {
+              "type": "nominal",
+              "field": "marital-status"
+            },
+            {
+              "type": "nominal",
+              "field": "occupation"
+            },
+            {
+              "type": "nominal",
+              "field": "relationship"
+            },
+            {
+              "type": "nominal",
+              "field": "race"
+            },
+            {
+              "type": "nominal",
+              "field": "sex"
+            },
+            {
+              "type": "quantitative",
+              "field": "capital-gain"
+            },
+            {
+              "type": "quantitative",
+              "field": "capital-loss"
+            },
+            {
+              "type": "quantitative",
+              "field": "hours-per-week"
+            },
+            {
+              "type": "nominal",
+              "field": "native-country"
+            }
+          ],
+          "x": {
+            "type": "quantitative",
+            "field": "x"
+          },
+          "y": {
+            "type": "quantitative",
+            "field": "y"
+          }
+        },
+        "height": width,
+        "selection": {
+          "selector004": {
+            "type": "interval",
+            "bind": "scales",
+            "encodings": [
+              "x",
+              "y"
+            ]
+          }
+        },
+        "width": height,
+        "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json"
+      };
       var embedOpt = {"mode": "vega-lite"};
 
       function showError(el, error){
@@ -25,11 +124,45 @@
                           + '</div>');
           throw error;
       }
-      const el = document.getElementById('vis');
       vegaEmbed("#vis", spec, embedOpt)
         .catch(error => showError(el, error));
-    })(vegaEmbed);
+    };
+    var resizeTimer;
+    d3.select(window).on('resize', function(){
+      if(resizeTimer){
+        clearTimeout(resizeTimer);
+      }
+      resizeTimer = setTimeout(resize, 100);
+    });
+    function resize(){
+      divElement.selectAll("*").remove();
 
+      // calculate width and height of vis
+      var w, h, th;
+      var style = window.getComputedStyle ? getComputedStyle(titleElement.node(), null) : titleElement.node().currentStyle;
+      var mt = parseInt(style.marginTop) || 0;
+      var mb = parseInt(style.marginBottom) || 0;
+
+      if(window.innerHeight){
+        w = window.innerWidth;
+        h = window.innerHeight;
+      }else{
+        w = document.documentElement.clientWidth;
+        h = document.documentElement.clientHeight;
+      }
+      console.log(mt, mb);
+      th = titleElement.node().clientHeight + mt + mb;
+      if(h > th){
+        h = h - th;
+      }
+      h = 0.9 * h;
+      if(w > h){
+        w = h;
+      }
+      visualize(vegaEmbed, w, w, divElement.node());
+    }
+    resize();
+    
   </script>
 </body>
 </html>

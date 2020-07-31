@@ -5,16 +5,796 @@
     .error {
         color: red;
     }
+    
+    .helvetica_font{
+      font-family: Helvetica;
+    }
   </style>
+  <script type="text/javascript" src="https://d3js.org/d3-selection.v1.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.8.1"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
 </head>
 <body>
-  <div id="vis"></div>
+  <h3 id="vis_ttl" class="helvetica_font"></h3>
+  <div id="vis" class="helvetica_font"></div>
+  <p id="disclaimer">* Assets filed in or after 2015 and published in or before 2019 in US.</p>
+  <p><b>Data Sources</b></p>
+  <ul>
+    <li><a target="_blank" href="https://archive.ics.uci.edu/ml/datasets/Census+Income">UCI Machine Learning Repository</a></li>
+  </ul>
   <script>
-    (function(vegaEmbed) {
-      var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"orient": "top"}, "title": {"fontSize": 12}}, "hconcat": [{"vconcat": [{"mark": "circle", "encoding": {"color": {"type": "nominal", "field": "income"}, "tooltip": [{"type": "quantitative", "field": "age"}, {"type": "nominal", "field": "workclass"}, {"type": "nominal", "field": "education_level"}, {"type": "quantitative", "field": "education-num"}, {"type": "nominal", "field": "marital-status"}, {"type": "nominal", "field": "occupation"}, {"type": "nominal", "field": "relationship"}, {"type": "nominal", "field": "race"}, {"type": "nominal", "field": "sex"}, {"type": "quantitative", "field": "capital-gain"}, {"type": "quantitative", "field": "capital-loss"}, {"type": "quantitative", "field": "hours-per-week"}, {"type": "nominal", "field": "native-country"}], "x": {"type": "quantitative", "axis": {"title": ""}, "field": "x"}, "y": {"type": "quantitative", "axis": {"title": ""}, "field": "y"}}, "height": 500, "selection": {"selector013": {"type": "single"}}, "width": 500}, {"layer": [{"mark": "bar", "encoding": {"color": {"type": "nominal", "field": "income"}, "x": {"type": "quantitative", "aggregate": "count", "axis": {"title": ""}}, "y": {"type": "nominal", "axis": {"labelFontSize": 11, "ticks": false, "title": ""}, "field": "income", "sort": "-x"}}, "width": 500}, {"mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 3}, "encoding": {"color": {"type": "nominal", "field": "income"}, "text": {"type": "quantitative", "aggregate": "count", "format": ",d"}, "x": {"type": "quantitative", "aggregate": "count", "axis": {"title": ""}}, "y": {"type": "nominal", "axis": {"labelFontSize": 11, "ticks": false, "title": ""}, "field": "income", "sort": "-x"}}, "width": 500}]}], "transform": [{"filter": {"selection": "selector001"}}, {"filter": {"selection": "selector002"}}, {"filter": {"selection": "selector003"}}, {"filter": {"selection": "selector004"}}, {"filter": {"selection": "selector005"}}, {"filter": {"selection": "selector006"}}, {"filter": {"selection": "selector007"}}, {"filter": {"selection": "selector008"}}, {"filter": {"selection": "selector009"}}, {"filter": {"selection": "selector010"}}, {"filter": {"selection": "selector011"}}, {"filter": {"selection": "selector012"}}]}, {"vconcat": [{"mark": "bar", "encoding": {"color": {"condition": {"type": "nominal", "field": "income", "selection": "selector001"}, "value": "lightgray"}, "x": {"type": "quantitative", "aggregate": "count", "axis": {"title": ""}}, "y": {"type": "nominal", "axis": {"labelFontSize": 11, "ticks": false, "title": ""}, "field": "sex", "sort": "-x"}}, "height": 30, "selection": {"selector001": {"type": "multi", "fields": ["sex"]}}, "title": "Gender", "width": 200}, {"mark": "bar", "encoding": {"color": {"condition": {"type": "nominal", "field": "income", "selection": "selector002"}, "value": "lightgray"}, "x": {"type": "quantitative", "aggregate": "count", "axis": {"title": ""}}, "y": {"type": "nominal", "axis": {"labelFontSize": 11, "ticks": false, "title": ""}, "field": "race", "sort": "-x"}}, "height": 75, "selection": {"selector002": {"type": "multi", "fields": ["race"]}}, "title": "Race", "width": 200}, {"mark": "bar", "encoding": {"color": {"condition": {"type": "nominal", "field": "income", "selection": "selector003"}, "value": "lightgray"}, "x": {"type": "quantitative", "aggregate": "count", "axis": {"title": ""}}, "y": {"type": "nominal", "axis": {"labelFontSize": 11, "ticks": false, "title": ""}, "field": "capital_gain", "sort": "-x"}}, "height": 30, "selection": {"selector003": {"type": "multi", "fields": ["capital_gain"]}}, "title": "Capital Gain", "width": 200}, {"mark": "bar", "encoding": {"color": {"condition": {"type": "nominal", "field": "income", "selection": "selector004"}, "value": "lightgray"}, "x": {"type": "quantitative", "aggregate": "count", "axis": {"title": ""}}, "y": {"type": "nominal", "axis": {"labelFontSize": 11, "ticks": false, "title": ""}, "field": "capital_loss", "sort": "-x"}}, "height": 30, "selection": {"selector004": {"type": "multi", "fields": ["capital_loss"]}}, "title": "Capital Loss", "width": 200}, {"mark": "bar", "encoding": {"color": {"condition": {"type": "nominal", "field": "income", "selection": "selector005"}, "value": "lightgray"}, "x": {"type": "quantitative", "aggregate": "count", "axis": {"title": ""}}, "y": {"type": "nominal", "axis": {"labelFontSize": 11, "ticks": false, "title": ""}, "field": "_age", "sort": "-x"}}, "height": 100, "selection": {"selector005": {"type": "multi", "fields": ["_age"]}}, "title": "Age", "width": 200}, {"mark": "bar", "encoding": {"color": {"condition": {"type": "nominal", "field": "income", "selection": "selector009"}, "value": "lightgray"}, "x": {"type": "quantitative", "aggregate": "count", "axis": {"title": ""}}, "y": {"type": "nominal", "axis": {"labelFontSize": 11, "ticks": false, "title": ""}, "field": "hours_per_week", "sort": "-x"}}, "height": 100, "selection": {"selector009": {"type": "multi", "fields": ["hours_per_week"]}}, "title": "Hours/week", "width": 200}]}, {"vconcat": [{"mark": "bar", "encoding": {"color": {"condition": {"type": "nominal", "field": "income", "selection": "selector006"}, "value": "lightgray"}, "x": {"type": "quantitative", "aggregate": "count", "axis": {"title": ""}}, "y": {"type": "nominal", "axis": {"labelFontSize": 11, "ticks": false, "title": ""}, "field": "_education_level", "sort": "-x"}}, "height": 200, "selection": {"selector006": {"type": "multi", "fields": ["_education_level"]}}, "title": "Education", "width": 200}, {"mark": "bar", "encoding": {"color": {"condition": {"type": "nominal", "field": "income", "selection": "selector007"}, "value": "lightgray"}, "x": {"type": "quantitative", "aggregate": "count", "axis": {"title": ""}}, "y": {"type": "nominal", "axis": {"labelFontSize": 11, "ticks": false, "title": ""}, "field": "occupation", "sort": "-x"}}, "height": 200, "selection": {"selector007": {"type": "multi", "fields": ["occupation"]}}, "title": "Occupation_sel", "width": 200}, {"mark": "bar", "encoding": {"color": {"condition": {"type": "nominal", "field": "income", "selection": "selector008"}, "value": "lightgray"}, "x": {"type": "quantitative", "aggregate": "count", "axis": {"title": ""}}, "y": {"type": "nominal", "axis": {"labelFontSize": 11, "ticks": false, "title": ""}, "field": "workclass", "sort": "-x"}}, "height": 120, "selection": {"selector008": {"type": "multi", "fields": ["workclass"]}}, "title": "Workclass", "width": 200}]}, {"vconcat": [{"mark": "bar", "encoding": {"color": {"condition": {"type": "nominal", "field": "income", "selection": "selector010"}, "value": "lightgray"}, "x": {"type": "quantitative", "aggregate": "count", "axis": {"title": ""}}, "y": {"type": "nominal", "axis": {"labelFontSize": 11, "ticks": false, "title": ""}, "field": "marital-status", "sort": "-x"}}, "selection": {"selector010": {"type": "multi", "fields": ["marital-status"]}}, "title": "Marital Status", "width": 200}, {"mark": "bar", "encoding": {"color": {"condition": {"type": "nominal", "field": "income", "selection": "selector011"}, "value": "lightgray"}, "x": {"type": "quantitative", "aggregate": "count", "axis": {"title": ""}}, "y": {"type": "nominal", "axis": {"labelFontSize": 11, "ticks": false, "title": ""}, "field": "relationship", "sort": "-x"}}, "selection": {"selector011": {"type": "multi", "fields": ["relationship"]}}, "title": "Relationship", "width": 200}, {"mark": "bar", "encoding": {"color": {"condition": {"type": "nominal", "field": "income", "selection": "selector012"}, "value": "lightgray"}, "x": {"type": "quantitative", "aggregate": "count", "axis": {"title": ""}}, "y": {"type": "nominal", "axis": {"labelFontSize": 11, "ticks": false, "title": ""}, "field": "native_country", "sort": "-x"}}, "selection": {"selector012": {"type": "multi", "fields": ["native_country"]}}, "title": "Native Country", "width": 200}]}], "data": {"url": "altair-data-7ea41a76056ebdaf71380e9cf0e3d503.json", "format": {"type": "json"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json"};
+    var divElement = d3.select('#vis');
+    var titleElement = d3.select('#vis_ttl');
+    var disclaimerElement = d3.select('#disclaimer');
+    var visualize = function(vegaEmbed, width, height, labelSize, el, url) {
+      var scatterHeight = height - 100;
+      var scatterWidth = width * 0.4;
+      if(scatterWidth > scatterHeight){
+        scatterWidth = scatterHeight;
+      }
+      var scatter = {
+                "mark": "circle",
+                "encoding": {
+                  "color": {
+                    "type": "nominal",
+                    "field": "income"
+                  },
+                  "tooltip": [
+                    {
+                      "type": "quantitative",
+                      "field": "age"
+                    },
+                    {
+                      "type": "nominal",
+                      "field": "workclass"
+                    },
+                    {
+                      "type": "nominal",
+                      "field": "education_level"
+                    },
+                    {
+                      "type": "quantitative",
+                      "field": "education-num"
+                    },
+                    {
+                      "type": "nominal",
+                      "field": "marital-status"
+                    },
+                    {
+                      "type": "nominal",
+                      "field": "occupation"
+                    },
+                    {
+                      "type": "nominal",
+                      "field": "relationship"
+                    },
+                    {
+                      "type": "nominal",
+                      "field": "race"
+                    },
+                    {
+                      "type": "nominal",
+                      "field": "sex"
+                    },
+                    {
+                      "type": "quantitative",
+                      "field": "capital-gain"
+                    },
+                    {
+                      "type": "quantitative",
+                      "field": "capital-loss"
+                    },
+                    {
+                      "type": "quantitative",
+                      "field": "hours-per-week"
+                    },
+                    {
+                      "type": "nominal",
+                      "field": "native-country"
+                    }
+                  ],
+                  "x": {
+                    "type": "quantitative",
+                    "axis": {
+                      "title": "",
+                      "labels":null
+                    },
+                    "field": "x"
+                  },
+                  "y": {
+                    "type": "quantitative",
+                    "axis": {
+                      "title": "",
+                      "labels":null
+                    },
+                    "field": "y"
+                  }
+                },
+                "height": scatterWidth,
+                "selection": {
+                  "selector013": {
+                    "type": "single"
+                  }
+                },
+                "width": scatterWidth
+              };
+      var income_bar = {
+                "layer": [
+                  {
+                    "mark": "bar",
+                    "encoding": {
+                      "color": {
+                        "type": "nominal",
+                        "field": "income"
+                      },
+                      "x": {
+                        "type": "quantitative",
+                        "aggregate": "count",
+                        "axis": {
+                          "title": ""
+                        }
+                      },
+                      "y": {
+                        "type": "nominal",
+                        "axis": {
+                          "labelFontSize": 11,
+                          "ticks": false,
+                          "title": ""
+                        },
+                        "field": "income",
+                        "sort": "-x"
+                      }
+                    },
+                    "width": scatterWidth
+                  },
+                  {
+                    "mark": {
+                      "type": "text",
+                      "align": "left",
+                      "baseline": "middle",
+                      "dx": 3
+                    },
+                    "encoding": {
+                      "color": {
+                        "type": "nominal",
+                        "field": "income"
+                      },
+                      "text": {
+                        "type": "quantitative",
+                        "aggregate": "count",
+                        "format": ",d"
+                      },
+                      "x": {
+                        "type": "quantitative",
+                        "aggregate": "count",
+                        "axis": {
+                          "title": ""
+                        }
+                      },
+                      "y": {
+                        "type": "nominal",
+                        "axis": {
+                          "labelFontSize": 11,
+                          "ticks": false,
+                          "title": ""
+                        },
+                        "field": "income",
+                        "sort": "-x"
+                      }
+                    },
+                    "width": scatterWidth
+                  }
+                ]
+              };
+      var sex_bar = {
+                "mark": "bar",
+                "encoding": {
+                  "color": {
+                    "condition": {
+                      "type": "nominal",
+                      "field": "income",
+                      "selection": "selector001"
+                    },
+                    "value": "lightgray"
+                  },
+                  "x": {
+                    "type": "quantitative",
+                    "aggregate": "count",
+                    "axis": {
+                      "title": ""
+                    }
+                  },
+                  "y": {
+                    "type": "nominal",
+                    "axis": {
+                      "labelFontSize": 11,
+                      "ticks": false,
+                      "title": ""
+                    },
+                    "field": "sex",
+                    "sort": "-x"
+                  }
+                },
+                "height": 30,
+                "selection": {
+                  "selector001": {
+                    "type": "multi",
+                    "fields": [
+                      "sex"
+                    ]
+                  }
+                },
+                "title": "Gender",
+                "width": 200
+              };
+      var race_bar = {
+                "mark": "bar",
+                "encoding": {
+                  "color": {
+                    "condition": {
+                      "type": "nominal",
+                      "field": "income",
+                      "selection": "selector002"
+                    },
+                    "value": "lightgray"
+                  },
+                  "x": {
+                    "type": "quantitative",
+                    "aggregate": "count",
+                    "axis": {
+                      "title": ""
+                    }
+                  },
+                  "y": {
+                    "type": "nominal",
+                    "axis": {
+                      "labelFontSize": 11,
+                      "ticks": false,
+                      "title": ""
+                    },
+                    "field": "race",
+                    "sort": "-x"
+                  }
+                },
+                "height": 75,
+                "selection": {
+                  "selector002": {
+                    "type": "multi",
+                    "fields": [
+                      "race"
+                    ]
+                  }
+                },
+                "title": "Race",
+                "width": 200
+              };
+      var gain_bar = {
+                "mark": "bar",
+                "encoding": {
+                  "color": {
+                    "condition": {
+                      "type": "nominal",
+                      "field": "income",
+                      "selection": "selector003"
+                    },
+                    "value": "lightgray"
+                  },
+                  "x": {
+                    "type": "quantitative",
+                    "aggregate": "count",
+                    "axis": {
+                      "title": ""
+                    }
+                  },
+                  "y": {
+                    "type": "nominal",
+                    "axis": {
+                      "labelFontSize": 11,
+                      "ticks": false,
+                      "title": ""
+                    },
+                    "field": "capital_gain",
+                    "sort": "-x"
+                  }
+                },
+                "height": 30,
+                "selection": {
+                  "selector003": {
+                    "type": "multi",
+                    "fields": [
+                      "capital_gain"
+                    ]
+                  }
+                },
+                "title": "Capital Gain",
+                "width": 200
+              };
+      var loss_bar = {
+                "mark": "bar",
+                "encoding": {
+                  "color": {
+                    "condition": {
+                      "type": "nominal",
+                      "field": "income",
+                      "selection": "selector004"
+                    },
+                    "value": "lightgray"
+                  },
+                  "x": {
+                    "type": "quantitative",
+                    "aggregate": "count",
+                    "axis": {
+                      "title": ""
+                    }
+                  },
+                  "y": {
+                    "type": "nominal",
+                    "axis": {
+                      "labelFontSize": 11,
+                      "ticks": false,
+                      "title": ""
+                    },
+                    "field": "capital_loss",
+                    "sort": "-x"
+                  }
+                },
+                "height": 30,
+                "selection": {
+                  "selector004": {
+                    "type": "multi",
+                    "fields": [
+                      "capital_loss"
+                    ]
+                  }
+                },
+                "title": "Capital Loss",
+                "width": 200
+              };
+      var age_bar = {
+                "mark": "bar",
+                "encoding": {
+                  "color": {
+                    "condition": {
+                      "type": "nominal",
+                      "field": "income",
+                      "selection": "selector005"
+                    },
+                    "value": "lightgray"
+                  },
+                  "x": {
+                    "type": "quantitative",
+                    "aggregate": "count",
+                    "axis": {
+                      "title": ""
+                    }
+                  },
+                  "y": {
+                    "type": "nominal",
+                    "axis": {
+                      "labelFontSize": 11,
+                      "ticks": false,
+                      "title": ""
+                    },
+                    "field": "_age",
+                    "sort": "-x"
+                  }
+                },
+                "height": 100,
+                "selection": {
+                  "selector005": {
+                    "type": "multi",
+                    "fields": [
+                      "_age"
+                    ]
+                  }
+                },
+                "title": "Age",
+                "width": 200
+              };
+      var hours_bar = {
+                "mark": "bar",
+                "encoding": {
+                  "color": {
+                    "condition": {
+                      "type": "nominal",
+                      "field": "income",
+                      "selection": "selector009"
+                    },
+                    "value": "lightgray"
+                  },
+                  "x": {
+                    "type": "quantitative",
+                    "aggregate": "count",
+                    "axis": {
+                      "title": ""
+                    }
+                  },
+                  "y": {
+                    "type": "nominal",
+                    "axis": {
+                      "labelFontSize": 11,
+                      "ticks": false,
+                      "title": ""
+                    },
+                    "field": "hours_per_week",
+                    "sort": "-x"
+                  }
+                },
+                "height": 100,
+                "selection": {
+                  "selector009": {
+                    "type": "multi",
+                    "fields": [
+                      "hours_per_week"
+                    ]
+                  }
+                },
+                "title": "Hours/week",
+                "width": 200
+              };
+      var education_bar = {
+                "mark": "bar",
+                "encoding": {
+                  "color": {
+                    "condition": {
+                      "type": "nominal",
+                      "field": "income",
+                      "selection": "selector006"
+                    },
+                    "value": "lightgray"
+                  },
+                  "x": {
+                    "type": "quantitative",
+                    "aggregate": "count",
+                    "axis": {
+                      "title": ""
+                    }
+                  },
+                  "y": {
+                    "type": "nominal",
+                    "axis": {
+                      "labelFontSize": 11,
+                      "ticks": false,
+                      "title": ""
+                    },
+                    "field": "_education_level",
+                    "sort": "-x"
+                  }
+                },
+                "height": 200,
+                "selection": {
+                  "selector006": {
+                    "type": "multi",
+                    "fields": [
+                      "_education_level"
+                    ]
+                  }
+                },
+                "title": "Education",
+                "width": 200
+              };
+      var occupation_bar = {
+                "mark": "bar",
+                "encoding": {
+                  "color": {
+                    "condition": {
+                      "type": "nominal",
+                      "field": "income",
+                      "selection": "selector007"
+                    },
+                    "value": "lightgray"
+                  },
+                  "x": {
+                    "type": "quantitative",
+                    "aggregate": "count",
+                    "axis": {
+                      "title": ""
+                    }
+                  },
+                  "y": {
+                    "type": "nominal",
+                    "axis": {
+                      "labelFontSize": 11,
+                      "ticks": false,
+                      "title": ""
+                    },
+                    "field": "occupation",
+                    "sort": "-x"
+                  }
+                },
+                "height": 200,
+                "selection": {
+                  "selector007": {
+                    "type": "multi",
+                    "fields": [
+                      "occupation"
+                    ]
+                  }
+                },
+                "title": "Occupation_sel",
+                "width": 200
+              };
+      var workclass_bar = {
+                "mark": "bar",
+                "encoding": {
+                  "color": {
+                    "condition": {
+                      "type": "nominal",
+                      "field": "income",
+                      "selection": "selector008"
+                    },
+                    "value": "lightgray"
+                  },
+                  "x": {
+                    "type": "quantitative",
+                    "aggregate": "count",
+                    "axis": {
+                      "title": ""
+                    }
+                  },
+                  "y": {
+                    "type": "nominal",
+                    "axis": {
+                      "labelFontSize": 11,
+                      "ticks": false,
+                      "title": ""
+                    },
+                    "field": "workclass",
+                    "sort": "-x"
+                  }
+                },
+                "height": 120,
+                "selection": {
+                  "selector008": {
+                    "type": "multi",
+                    "fields": [
+                      "workclass"
+                    ]
+                  }
+                },
+                "title": "Workclass",
+                "width": 200
+              };
+      var marital_bar = {
+                "mark": "bar",
+                "encoding": {
+                  "color": {
+                    "condition": {
+                      "type": "nominal",
+                      "field": "income",
+                      "selection": "selector010"
+                    },
+                    "value": "lightgray"
+                  },
+                  "x": {
+                    "type": "quantitative",
+                    "aggregate": "count",
+                    "axis": {
+                      "title": ""
+                    }
+                  },
+                  "y": {
+                    "type": "nominal",
+                    "axis": {
+                      "labelFontSize": 11,
+                      "ticks": false,
+                      "title": ""
+                    },
+                    "field": "marital-status",
+                    "sort": "-x"
+                  }
+                },
+                "selection": {
+                  "selector010": {
+                    "type": "multi",
+                    "fields": [
+                      "marital-status"
+                    ]
+                  }
+                },
+                "title": "Marital Status",
+                "width": 200
+              };
+      var relationship_bar = {
+                "mark": "bar",
+                "encoding": {
+                  "color": {
+                    "condition": {
+                      "type": "nominal",
+                      "field": "income",
+                      "selection": "selector011"
+                    },
+                    "value": "lightgray"
+                  },
+                  "x": {
+                    "type": "quantitative",
+                    "aggregate": "count",
+                    "axis": {
+                      "title": ""
+                    }
+                  },
+                  "y": {
+                    "type": "nominal",
+                    "axis": {
+                      "labelFontSize": 11,
+                      "ticks": false,
+                      "title": ""
+                    },
+                    "field": "relationship",
+                    "sort": "-x"
+                  }
+                },
+                "selection": {
+                  "selector011": {
+                    "type": "multi",
+                    "fields": [
+                      "relationship"
+                    ]
+                  }
+                },
+                "title": "Relationship",
+                "width": 200
+              };
+      var county_bar = {
+                "mark": "bar",
+                "encoding": {
+                  "color": {
+                    "condition": {
+                      "type": "nominal",
+                      "field": "income",
+                      "selection": "selector012"
+                    },
+                    "value": "lightgray"
+                  },
+                  "x": {
+                    "type": "quantitative",
+                    "aggregate": "count",
+                    "axis": {
+                      "title": ""
+                    }
+                  },
+                  "y": {
+                    "type": "nominal",
+                    "axis": {
+                      "labelFontSize": 11,
+                      "ticks": false,
+                      "title": ""
+                    },
+                    "field": "native_country",
+                    "sort": "-x"
+                  }
+                },
+                "selection": {
+                  "selector012": {
+                    "type": "multi",
+                    "fields": [
+                      "native_country"
+                    ]
+                  }
+                },
+                "title": "Native Country",
+                "width": 200
+              };
+                                                                        
+      var spec = {
+        "config": {
+          "view": {
+            "continuousWidth": 400,
+            "continuousHeight": 300
+          },
+          "legend": {
+            "orient": "bottom"
+          },
+          "title": {
+            "fontSize": 12
+          }
+        },
+        "hconcat": [
+          {
+            "vconcat": [
+              scatter,
+              income_bar
+            ],
+            "transform": [
+              {
+                "filter": {
+                  "selection": "selector001"
+                }
+              },
+              {
+                "filter": {
+                  "selection": "selector002"
+                }
+              },
+              {
+                "filter": {
+                  "selection": "selector003"
+                }
+              },
+              {
+                "filter": {
+                  "selection": "selector004"
+                }
+              },
+              {
+                "filter": {
+                  "selection": "selector005"
+                }
+              },
+              {
+                "filter": {
+                  "selection": "selector006"
+                }
+              },
+              {
+                "filter": {
+                  "selection": "selector007"
+                }
+              },
+              {
+                "filter": {
+                  "selection": "selector008"
+                }
+              },
+              {
+                "filter": {
+                  "selection": "selector009"
+                }
+              },
+              {
+                "filter": {
+                  "selection": "selector010"
+                }
+              },
+              {
+                "filter": {
+                  "selection": "selector011"
+                }
+              },
+              {
+                "filter": {
+                  "selection": "selector012"
+                }
+              }
+            ]
+          },
+          {
+            "vconcat": [
+              sex_bar,
+              race_bar,
+              gain_bar,
+              loss_bar,
+              age_bar,
+              loss_bar,
+              hours_bar
+            ]
+          },
+          {
+            "vconcat": [
+              education_bar,
+              occupation_bar,
+              workclass_bar
+            ]
+          },
+          {
+            "vconcat": [
+              marital_bar,
+              relationship_bar,
+              county_bar
+            ]
+          }
+        ],
+        "data": {
+          "url": url,
+          "format": {
+            "type": "json"
+          }
+        },
+        "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json"
+      };
+      
+
       var embedOpt = {"mode": "vega-lite"};
 
       function showError(el, error){
@@ -25,11 +805,59 @@
                           + '</div>');
           throw error;
       }
-      const el = document.getElementById('vis');
       vegaEmbed("#vis", spec, embedOpt)
         .catch(error => showError(el, error));
-    })(vegaEmbed);
+    };
+    var resizeTimer;
+    d3.select(window).on('resize', function(){
+      if(resizeTimer){
+        clearTimeout(resizeTimer);
+      }
+      resizeTimer = setTimeout(resize, 100);
+    });
+    function resize(){
+      divElement.selectAll("*").remove();
 
+      // calculate width and height of vis
+      var w, h, th, ph;
+      var style = window.getComputedStyle ? getComputedStyle(titleElement.node(), null) : titleElement.node().currentStyle;
+      var pStyle = window.getComputedStyle ? getComputedStyle(disclaimerElement.node(), null) : disclaimerElement.node().currentStyle;
+      var mt = parseInt(style.marginTop) || 0;
+      var mb = parseInt(style.marginBottom) || 0;
+      var pmt = parseInt(pStyle.marginTop) || 0;
+      var pmb = parseInt(pStyle.marginBottom) || 0;
+      var lSize;
+
+      if(window.innerHeight){
+        w = window.innerWidth;
+        h = window.innerHeight;
+      }else{
+        w = document.documentElement.clientWidth;
+        h = document.documentElement.clientHeight;
+      }
+      th = titleElement.node().clientHeight + mt + mb;
+      ph = disclaimerElement.node().clientHeight + pmt + pmb;
+      if(h > (th + ph)){
+        h = h - th - ph;
+      }
+      if(h < 200){
+        h = 200;
+      }
+      if(w < 500){
+        w = 500;
+      }
+      lSize = w/60;
+      if(lSize > 13){
+        lSize = 13;
+      }
+      if(lSize < 7){
+        lSize = 7;
+      }
+      visualize(vegaEmbed, 
+                w, h, lSize, divElement.node(), "altair-data-dashboard.json");
+    }
+    titleElement.html('US 1994 Census Data *')
+    resize();
   </script>
 </body>
 </html>
